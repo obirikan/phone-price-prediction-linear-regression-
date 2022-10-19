@@ -53,9 +53,10 @@ for _ in range(1000):
 
 savedmodel=open('studentmodel.pickle', 'rb')
 newlinear=pickle.load(savedmodel)
-
+mine=[[5,401,4,2,16,2,16,8,2500]]
+mine=np.array(mine)
 #predict the outcome of your value(s)
-predictions=newlinear.predict()
+predictions=newlinear.predict(mine)
 
 #loop through prediction to see if your data is corresponding well
 for x in range(len(predictions)):
