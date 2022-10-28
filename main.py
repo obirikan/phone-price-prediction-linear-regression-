@@ -21,16 +21,16 @@ print(dataset.head())
 # x9=np.array(dataset['battery'])
 # x10=np.array(dataset['ppi'])
 
-dataset =dataset[['Product_id','Price','Sale','weight','resoloution','ppi','cpu core','cpu freq','internal mem','ram','RearCam','Front_Cam','battery','thickness']]
-
+dataset2=dataset[['resoloution','ppi','cpu core','cpu freq','internal mem','ram','RearCam','Front_Cam','battery']]
+print(dataset2)
 x = np.array(dataset.drop(['Product_id','Price','Sale','thickness','weight'],1), dtype=np.int64)
-y=np.array(dataset['Price'])
+y=np.array(dataset['Price'],dtype=np.int64)
 x_train,x_test,y_train,y_test=sklearn.model_selection.train_test_split(x,y,test_size=0.1)
 
 
 best=0
 for _ in range(1000):
-    x_train,x_test,y_train,y_test=sklearn.model_selection.train_test_split(x,y,test_size=0.08)
+    x_train,x_test,y_train,y_test=sklearn.model_selection.train_test_split(x,y,test_size=0.1)
 
     #use the linearRegression module
     linear=linear_model.LinearRegression()
@@ -40,7 +40,6 @@ for _ in range(1000):
 
     #test the accuracy of the error
     acc=linear.score(x_test,y_test)
-    print(acc)
 
     #printing out some values for verification
     #test model accuracy level
@@ -56,7 +55,7 @@ newlinear=pickle.load(savedmodel)
 mine=[[5,401,4,2,16,2,16,8,2500]]
 mine=np.array(mine)
 #predict the outcome of your value(s)
-predictions=newlinear.predict(mine)
+predictions=newlinear.predict(x_test)
 
 #loop through prediction to see if your data is corresponding well
 for x in range(len(predictions)):
