@@ -21,6 +21,7 @@ print(dataset.head())
 # x9=np.array(dataset['battery'])
 # x10=np.array(dataset['ppi'])
 
+#we can train the data based on the dataset we prefer
 dataset2=dataset[['resoloution','ppi','cpu core','cpu freq','internal mem','ram','RearCam','Front_Cam','battery']]
 print(dataset2)
 x = np.array(dataset.drop(['Product_id','Price','Sale','thickness','weight'],1), dtype=np.int64)
